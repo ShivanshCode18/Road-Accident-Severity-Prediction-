@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoderModel","timestamp":1794423343505,"sparkVersion":"3.5.9","uid":"OneHotEncoder_eefa38d3f86a","paramMap":{"handleInvalid":"keep","outputCol":"road_speed_inter_vec","inputCol":"road_speed_inter_idx"},"defaultParamMap":{"dropLast":true,"handleInvalid":"error","outputCol":"OneHotEncoder_eefa38d3f86a__output"}}

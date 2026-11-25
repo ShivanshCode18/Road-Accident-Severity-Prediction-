@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoderModel","timestamp":1794423340136,"sparkVersion":"3.5.9","uid":"OneHotEncoder_9aae5f2684f9","paramMap":{"outputCol":"weather_group_vec","handleInvalid":"keep","inputCol":"weather_group_idx"},"defaultParamMap":{"dropLast":true,"outputCol":"OneHotEncoder_9aae5f2684f9__output","handleInvalid":"error"}}

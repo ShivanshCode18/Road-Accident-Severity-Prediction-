@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1794423341893,"sparkVersion":"3.5.9","uid":"StringIndexer_64a90ffb76c0","paramMap":{"inputCol":"junction_control","outputCol":"junction_control_idx","handleInvalid":"keep"},"defaultParamMap":{"stringOrderType":"frequencyDesc","outputCol":"StringIndexer_64a90ffb76c0__output","handleInvalid":"error"}}

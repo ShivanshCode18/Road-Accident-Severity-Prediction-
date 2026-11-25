@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoderModel","timestamp":1794423345363,"sparkVersion":"3.5.9","uid":"OneHotEncoder_5fda5642f4fd","paramMap":{"outputCol":"weekend_time_inter_vec","inputCol":"weekend_time_inter_idx","handleInvalid":"keep"},"defaultParamMap":{"outputCol":"OneHotEncoder_5fda5642f4fd__output","handleInvalid":"error","dropLast":true}}

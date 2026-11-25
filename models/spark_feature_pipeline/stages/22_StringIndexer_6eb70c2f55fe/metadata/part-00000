@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1794423343207,"sparkVersion":"3.5.9","uid":"StringIndexer_6eb70c2f55fe","paramMap":{"outputCol":"road_speed_inter_idx","inputCol":"road_speed_inter","handleInvalid":"keep"},"defaultParamMap":{"outputCol":"StringIndexer_6eb70c2f55fe__output","stringOrderType":"frequencyDesc","handleInvalid":"error"}}

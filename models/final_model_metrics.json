@@ -1,0 +1,362 @@
+{
+  "best_model": "Random Forest",
+  "models": {
+    "Majority-Class Baseline": {
+      "model_name": "Majority-Class Baseline",
+      "type": "Zero-Rule Heuristic (Always Predicts Slight)",
+      "accuracy": 0.7437999999999999,
+      "weighted_precision": 0.5533,
+      "weighted_recall": 0.7438,
+      "weighted_f1": 0.6345,
+      "macro_precision": 0.2479,
+      "macro_recall": 0.3333,
+      "macro_f1": 0.2844,
+      "fatal_recall": 0.0,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.7438,
+          "recall": 1.0,
+          "f1": 0.8531
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 0,
+          "Serious": 0,
+          "Slight": 306
+        },
+        "Serious (True)": {
+          "Fatal": 0,
+          "Serious": 0,
+          "Slight": 4843
+        },
+        "Slight (True)": {
+          "Fatal": 0,
+          "Serious": 0,
+          "Slight": 14950
+        }
+      },
+      "train_time_sec": 0.0,
+      "predict_time_sec": 0.01
+    },
+    "Logistic Regression": {
+      "model_name": "Logistic Regression",
+      "type": "Multinomial Logistic Regression (Class-Weighted)",
+      "accuracy": 0.47659999999999997,
+      "weighted_precision": 0.6784,
+      "weighted_recall": 0.4766,
+      "weighted_f1": 0.5494,
+      "macro_precision": 0.3829,
+      "macro_recall": 0.4896,
+      "macro_f1": 0.3392,
+      "fatal_recall": 0.6175999999999999,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.0366,
+          "recall": 0.6175999999999999,
+          "f1": 0.0691
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.2971,
+          "recall": 0.3298,
+          "f1": 0.3126
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.815,
+          "recall": 0.5213,
+          "f1": 0.6359
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 189,
+          "Serious": 60,
+          "Slight": 57
+        },
+        "Serious (True)": {
+          "Fatal": 1534,
+          "Serious": 1597,
+          "Slight": 1712
+        },
+        "Slight (True)": {
+          "Fatal": 3438,
+          "Serious": 3718,
+          "Slight": 7794
+        }
+      },
+      "train_time_sec": 18.89,
+      "predict_time_sec": 2.56
+    },
+    "Decision Tree": {
+      "model_name": "Decision Tree",
+      "type": "Decision Tree Classifier (maxDepth=10)",
+      "accuracy": 0.7358,
+      "weighted_precision": 0.6411,
+      "weighted_recall": 0.7358,
+      "weighted_f1": 0.6476,
+      "macro_precision": 0.3862,
+      "macro_recall": 0.3401,
+      "macro_f1": 0.3088,
+      "fatal_recall": 0.0033,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.0625,
+          "recall": 0.0033,
+          "f1": 0.0062
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.3485,
+          "recall": 0.041100000000000005,
+          "f1": 0.0735
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.7477,
+          "recall": 0.9759,
+          "f1": 0.8467
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 1,
+          "Serious": 20,
+          "Slight": 285
+        },
+        "Serious (True)": {
+          "Fatal": 6,
+          "Serious": 199,
+          "Slight": 4638
+        },
+        "Slight (True)": {
+          "Fatal": 9,
+          "Serious": 352,
+          "Slight": 14589
+        }
+      },
+      "train_time_sec": 22.55,
+      "predict_time_sec": 1.47
+    },
+    "Random Forest": {
+      "model_name": "Random Forest",
+      "type": "Random Forest Classifier (60 Trees, maxDepth=12)",
+      "accuracy": 0.5811,
+      "weighted_precision": 0.6748,
+      "weighted_recall": 0.5811,
+      "weighted_f1": 0.621,
+      "macro_precision": 0.3923,
+      "macro_recall": 0.4788,
+      "macro_f1": 0.3809,
+      "fatal_recall": 0.4412,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.0482,
+          "recall": 0.4412,
+          "f1": 0.0869
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.3289,
+          "recall": 0.33,
+          "f1": 0.3294
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.7997,
+          "recall": 0.6654000000000001,
+          "f1": 0.7264
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 135,
+          "Serious": 84,
+          "Slight": 87
+        },
+        "Serious (True)": {
+          "Fatal": 841,
+          "Serious": 1598,
+          "Slight": 2404
+        },
+        "Slight (True)": {
+          "Fatal": 1826,
+          "Serious": 3177,
+          "Slight": 9947
+        }
+      },
+      "train_time_sec": 159.69,
+      "predict_time_sec": 4.24
+    },
+    "Gradient-Boosted Trees": {
+      "model_name": "Gradient-Boosted Trees",
+      "type": "Gradient-Boosted Trees (OneVsRest Multiclass, 15 Iterations)",
+      "accuracy": 0.7429000000000001,
+      "weighted_precision": 0.657,
+      "weighted_recall": 0.7429,
+      "weighted_f1": 0.6433,
+      "macro_precision": 0.3894,
+      "macro_recall": 0.3375,
+      "macro_f1": 0.2971,
+      "fatal_recall": 0.0,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.4213,
+          "recall": 0.0204,
+          "f1": 0.039
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.7468,
+          "recall": 0.9922,
+          "f1": 0.8522
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 0,
+          "Serious": 19,
+          "Slight": 287
+        },
+        "Serious (True)": {
+          "Fatal": 2,
+          "Serious": 99,
+          "Slight": 4742
+        },
+        "Slight (True)": {
+          "Fatal": 0,
+          "Serious": 117,
+          "Slight": 14833
+        }
+      },
+      "train_time_sec": 53.21,
+      "predict_time_sec": 22.11
+    },
+    "Multilayer Perceptron": {
+      "model_name": "Multilayer Perceptron",
+      "type": "Multilayer Perceptron Neural Network (4-Layer MLP)",
+      "accuracy": 0.7437999999999999,
+      "weighted_precision": 0.5533,
+      "weighted_recall": 0.7438,
+      "weighted_f1": 0.6345,
+      "macro_precision": 0.2479,
+      "macro_recall": 0.3333,
+      "macro_f1": 0.2844,
+      "fatal_recall": 0.0,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.7438,
+          "recall": 1.0,
+          "f1": 0.8531
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 0,
+          "Serious": 0,
+          "Slight": 306
+        },
+        "Serious (True)": {
+          "Fatal": 0,
+          "Serious": 0,
+          "Slight": 4843
+        },
+        "Slight (True)": {
+          "Fatal": 0,
+          "Serious": 0,
+          "Slight": 14950
+        }
+      },
+      "train_time_sec": 81.45,
+      "predict_time_sec": 1.29
+    },
+    "Naive Bayes": {
+      "model_name": "Naive Bayes",
+      "type": "Gaussian Naive Bayes (Continuous Real Features)",
+      "accuracy": 0.12710000000000002,
+      "weighted_precision": 0.6692,
+      "weighted_recall": 0.1271,
+      "weighted_f1": 0.1917,
+      "macro_precision": 0.3517,
+      "macro_recall": 0.3757,
+      "macro_f1": 0.1005,
+      "fatal_recall": 0.9706,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.0172,
+          "recall": 0.9706,
+          "f1": 0.0339
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.2051,
+          "recall": 0.0083,
+          "f1": 0.0159
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.8329,
+          "recall": 0.1484,
+          "f1": 0.2519
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 297,
+          "Serious": 2,
+          "Slight": 7
+        },
+        "Serious (True)": {
+          "Fatal": 4365,
+          "Serious": 40,
+          "Slight": 438
+        },
+        "Slight (True)": {
+          "Fatal": 12579,
+          "Serious": 153,
+          "Slight": 2218
+        }
+      },
+      "train_time_sec": 1.58,
+      "predict_time_sec": 1.43
+    }
+  }
+}

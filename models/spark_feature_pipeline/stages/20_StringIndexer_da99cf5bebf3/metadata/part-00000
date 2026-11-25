@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1794423342571,"sparkVersion":"3.5.9","uid":"StringIndexer_da99cf5bebf3","paramMap":{"inputCol":"police_force","outputCol":"police_force_idx","handleInvalid":"keep"},"defaultParamMap":{"stringOrderType":"frequencyDesc","outputCol":"StringIndexer_da99cf5bebf3__output","handleInvalid":"error"}}

@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoderModel","timestamp":1794423340524,"sparkVersion":"3.5.9","uid":"OneHotEncoder_ec56fc1b9264","paramMap":{"outputCol":"road_surface_group_vec","inputCol":"road_surface_group_idx","handleInvalid":"keep"},"defaultParamMap":{"outputCol":"OneHotEncoder_ec56fc1b9264__output","handleInvalid":"error","dropLast":true}}
