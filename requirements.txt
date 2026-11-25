@@ -1,0 +1,33 @@
+# ==============================================================================
+# Road Accident Severity Prediction - Python Dependencies
+# Python Environment: Python 3.11.9 (64-bit)
+# ==============================================================================
+
+# Core Data Manipulation and Analysis
+pandas>=2.0.0,<3.0.0
+numpy>=1.24.0,<3.0.0
+pyarrow>=12.0.0
+
+# Machine Learning and Statistical Utilities
+scikit-learn>=1.3.0,<2.0.0
+
+# Data Visualization and Exploratory Data Analysis
+matplotlib>=3.7.0,<4.0.0
+seaborn>=0.12.0,<1.0.0
+
+# Interactive Notebooks
+jupyter>=1.0.0
+
+# Excel Workbook Utilities (Optional Python Automation)
+openpyxl>=3.1.0
+
+# PySpark (Matches installed Apache Spark 3.5.9 distribution)
+pyspark==3.5.9
+
+# ==============================================================================
+# External System Prerequisites (Not installed via pip):
+# - Java Development Kit (JDK): Oracle Java 8 (jdk1.8.0_481 64-bit)
+# - Apache Spark: Version 3.5.9 with Hadoop 3.2+
+# - Hadoop Winutils: winutils.exe for Hadoop 3.2.4 (on Windows)
+# - Microsoft Excel: 2016 / 2019 / 2021 / Microsoft 365 (to view dashboard)
+# ==============================================================================

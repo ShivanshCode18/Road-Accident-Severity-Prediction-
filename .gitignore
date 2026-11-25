@@ -1,0 +1,77 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment and Secrets
+.env
+.env.local
+*.pem
+*.key
+
+# Excel Lock / Temporary Files (Do NOT ignore actual workbook files)
+~$*.xlsx
+~$*.xls
+~$*.xlsm
+
+# Keep the authoritative Excel dashboard tracked
+!dataset/excel/Road_Accident_Severity_Professional_Dashboard.xlsx
+
+# Logs
+logs/*.log
+*.log
+
+# Apache Spark temporary run artifacts & local warehouse
+spark-warehouse/
+derby.log
+metastore_db/
+.part-*.crc
+._SUCCESS.crc
+
+# Model serializations (temporary binaries)
+models/*.pkl
+models/*.joblib

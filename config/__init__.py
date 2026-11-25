@@ -1,0 +1,45 @@
+"""Configuration package for Road Accident Severity Prediction project."""
+from .spark_config import (
+    PROJECT_ROOT,
+    DATA_DIR,
+    RAW_DATA_DIR,
+    PROCESSED_DATA_DIR,
+    EXCEL_DATA_DIR,
+    MODELS_DIR,
+    REPORTS_DIR,
+    LOGS_DIR,
+    DASHBOARD_DIR,
+    DOCS_DIR,
+    configure_spark_environment,
+    get_spark_configuration_dictionary,
+    CLEANED_DATA_PATH,
+    FINAL_100K_CSV_PATH,
+    FINAL_100K_PARQUET_PATH,
+    EXCEL_DASHBOARD_DATA_PATH,
+    EXCEL_DASHBOARD_PREDICTIONS_PATH,
+    MODEL_PERFORMANCE_METRICS_PATH,
+    EXCEL_WORKBOOK_PATH
+)
+
+__all__ = [
+    "PROJECT_ROOT",
+    "DATA_DIR",
+    "RAW_DATA_DIR",
+    "PROCESSED_DATA_DIR",
+    "EXCEL_DATA_DIR",
+    "MODELS_DIR",
+    "REPORTS_DIR",
+    "LOGS_DIR",
+    "DASHBOARD_DIR",
+    "DOCS_DIR",
+    "configure_spark_environment",
+    "get_spark_configuration_dictionary",
+    "CLEANED_DATA_PATH",
+    "FINAL_100K_CSV_PATH",
+    "FINAL_100K_PARQUET_PATH",
+    "EXCEL_DASHBOARD_DATA_PATH",
+    "EXCEL_DASHBOARD_PREDICTIONS_PATH",
+    "MODEL_PERFORMANCE_METRICS_PATH",
+    "EXCEL_WORKBOOK_PATH",
+]
+
