@@ -1,0 +1,121 @@
+==========================================================================================
+                    COMPREHENSIVE DATASET QUALITY AUDIT REPORT
+  UK Government STATS19 Collisions Dataset (Road Accident Severity Prediction)
+==========================================================================================
+Audit Execution Timestamp: 2026-11-12 01:02:08
+Auditor: Senior Data Engineer, Data Quality Analyst & ML Specialist
+
+1. RAW DATASET INTEGRITY VERIFICATION
+------------------------------------------------------------------------------------------
+Primary Raw File Path     : dataset/raw/dft-road-casualty-statistics-collision-2025.csv
+Alias Raw File Path       : dataset/raw/accident_collisions_2025.csv
+Binary SHA256 Match       : PASS (Exact Byte-for-Byte Identical)
+Raw SHA256 Checksum       : e699c19bdb82e47e449b6f3381ac87631865f6a31cef118c9955ba80ca870e2b
+Raw Record Count          : 101,525 (Expected: 101,525 | Audit: PASS)
+Raw Attribute Count       : 44 (Expected: 44 | Audit: PASS)
+Exact Duplicate Rows      : 0 (Audit: PASS - Zero duplicates)
+Duplicate Collision Index : 0 (Audit: PASS - Primary key fully unique)
+
+Invalid Coordinate Records Identification:
+- Records with Null Latitude/Longitude: 2 (Expected: exactly 2)
+    * Collision Index: 2025622500721 | Year: 2025 | Date: 04/11/2025 | Severity: 3 | Lat: nan | Lon: nan
+    * Collision Index: 2025622500752 | Year: 2025 | Date: 06/11/2025 | Severity: 2 | Lat: nan | Lon: nan
+- Valid Coordinate Bounding Box : Latitude [49.9125, 60.3453], Longitude [-7.4177, 1.7556]
+- Geographic Domain Validity    : PASS (Strictly inside UK territorial boundaries)
+
+Target Variable (collision_severity) Integrity:
+- Distinct Severity Codes       : [3, 2, 1] (Expected: [1, 2, 3] | Audit: PASS)
+- Fatal Collisions (Code 1)     : 1,453 (1.43%)
+- Serious Collisions (Code 2)   : 25,191 (24.81%)
+- Slight Collisions (Code 3)    : 74,881 (73.76%)
+- Target Code Validity          : PASS (Zero nulls, zero unknown severity codes)
+
+Temporal Integrity:
+- Date Format (DD/MM/YYYY) Valid: PASS (100% valid UK calendar dates)
+- Time Format (HH:MM) Valid     : PASS (100% valid 24-hr timestamps)
+
+Raw Column-Level Missing Value Analysis (All 44 Attributes):
+Col #  Column Name                                Data Type      Null Count   Null Pct
+--------------------------------------------------------------------------------------
+1      collision_index                            object                  0     0.000%
+2      collision_year                             int64                   0     0.000%
+3      collision_ref_no                           object                  0     0.000%
+4      location_easting_osgr                      float64                 2     0.002%
+5      location_northing_osgr                     float64                 2     0.002%
+6      longitude                                  float64                 2     0.002%
+7      latitude                                   float64                 2     0.002%
+8      police_force                               int64                   0     0.000%
+9      collision_severity                         int64                   0     0.000%
+10     number_of_vehicles                         int64                   0     0.000%
+11     number_of_casualties                       int64                   0     0.000%
+12     date                                       object                  0     0.000%
+13     day_of_week                                int64                   0     0.000%
+14     time                                       object                  0     0.000%
+15     local_authority_district                   int64                   0     0.000%
+16     local_authority_ons_district               object                  0     0.000%
+17     local_authority_highway                    object                  0     0.000%
+18     local_authority_highway_current            object                  0     0.000%
+19     first_road_class                           int64                   0     0.000%
+20     first_road_number                          int64                   0     0.000%
+21     road_type                                  int64                   0     0.000%
+22     speed_limit                                int64                   0     0.000%
+23     junction_detail_historic                   int64                   0     0.000%
+24     junction_detail                            int64                   0     0.000%
+25     junction_control                           int64                   0     0.000%
+26     second_road_class                          int64                   0     0.000%
+27     second_road_number                         int64                   0     0.000%
+28     pedestrian_crossing_human_control_historic int64                   0     0.000%
+29     pedestrian_crossing_physical_facilities_historic int64                   0     0.000%
+30     pedestrian_crossing                        int64                   0     0.000%
+31     light_conditions                           int64                   0     0.000%
+32     weather_conditions                         int64                   0     0.000%
+33     road_surface_conditions                    int64                   0     0.000%
+34     special_conditions_at_site                 int64                   0     0.000%
+35     carriageway_hazards_historic               int64                   0     0.000%
+36     carriageway_hazards                        int64                   0     0.000%
+37     urban_or_rural_area                        int64                   0     0.000%
+38     did_police_officer_attend_scene_of_accident int64                   0     0.000%
+39     trunk_road_flag                            int64                   0     0.000%
+40     lsoa_of_accident_location                  object                  0     0.000%
+41     enhanced_severity_collision                int64                   0     0.000%
+42     collision_injury_based                     int64                   0     0.000%
+43     collision_adjusted_severity_serious        float64                 0     0.000%
+44     collision_adjusted_severity_slight         float64                 0     0.000%
+--------------------------------------------------------------------------------------
+
+2. CLEANED DATASET VERIFICATION (accident_cleaned.csv)
+------------------------------------------------------------------------------------------
+Cleaned File Path         : dataset/processed/accident_cleaned.csv
+Cleaned Record Count      : 101,523 (Expected: 101,523 | Exact Delta: -2 | Audit: PASS)
+Total Columns Present     : 39 (25 retained base attributes + 14 engineered features)
+Exact Duplicate Rows      : 0 (Audit: PASS)
+Duplicate Collision Index : 0 (Audit: PASS)
+Invalid Coordinates Check : 0 null coordinates remaining (Audit: PASS)
+Record Removal Verif.     : Exactly 2 invalid coordinate records removed (['2025622500721', '2025622500752'])
+Valid Records Removed     : 0 valid records removed (Audit: PASS)
+
+3. FINAL PROCESSED DATASET VERIFICATION (accident_final_100k.csv & .parquet)
+------------------------------------------------------------------------------------------
+CSV File Path             : dataset/processed/accident_final_100k.csv
+Parquet File Path         : dataset/processed/accident_final_100k.parquet
+Record Count              : 100,000 (Expected: exactly 100,000 | Audit: PASS)
+Column Count              : 39 (Expected: exactly 39 | Audit: PASS)
+Duplicate Collision Index : 0 (Audit: PASS)
+Total Null Values         : 0 across 3,900,000 cells (Audit: PASS - Zero unhandled nulls)
+
+Target Severity Distribution (Stratified 100k Sample):
+- Fatal Collisions (Code 1)   : 1,431 (1.43%) (Expected: 1,431 / 1.43% | PASS)
+- Serious Collisions (Code 2) : 24,812 (24.81%) (Expected: 24,812 / 24.81% | PASS)
+- Slight Collisions (Code 3)  : 73,757 (73.76%) (Expected: 73,757 / 73.76% | PASS)
+- Total Stratified Sample     : 100,000 (100.00% | PASS)
+
+CSV vs. Parquet Format Parity Audit:
+- Row Count Equality          : 100000 == 100000 (Audit: PASS)
+- Column Count Equality       : 39 == 39 (Audit: PASS)
+- Column Schema / Order Match : PASS (100% identical column names and order)
+- Collision Index Row Match   : PASS (100% identical record sequence)
+- Value-by-Value Discrepancy  : 0 discrepancies across all 3,900,000 data elements (Audit: PASS)
+
+==========================================================================================
+OVERALL DATASET QUALITY STATUS: 100% VERIFIED & FULLY COMPLIANT
+==========================================================================================

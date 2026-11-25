@@ -1,0 +1,22 @@
+model_name,class_label,severity_name,precision,recall,f1_score
+Majority-Class Baseline,0,Fatal,0.0,0.0,0.0
+Majority-Class Baseline,1,Serious,0.0,0.0,0.0
+Majority-Class Baseline,2,Slight,0.7438,1.0,0.8531
+Logistic Regression,0,Fatal,0.0366,0.6176,0.0691
+Logistic Regression,1,Serious,0.2971,0.3298,0.3126
+Logistic Regression,2,Slight,0.815,0.5213,0.6359
+Decision Tree,0,Fatal,0.0625,0.0033,0.0062
+Decision Tree,1,Serious,0.3485,0.0411,0.0735
+Decision Tree,2,Slight,0.7477,0.9759,0.8467
+Random Forest,0,Fatal,0.0482,0.4412,0.0869
+Random Forest,1,Serious,0.3289,0.33,0.3294
+Random Forest,2,Slight,0.7997,0.6654,0.7264
+Gradient-Boosted Trees,0,Fatal,0.0,0.0,0.0
+Gradient-Boosted Trees,1,Serious,0.4213,0.0204,0.039
+Gradient-Boosted Trees,2,Slight,0.7468,0.9922,0.8522
+Multilayer Perceptron,0,Fatal,0.0,0.0,0.0
+Multilayer Perceptron,1,Serious,0.0,0.0,0.0
+Multilayer Perceptron,2,Slight,0.7438,1.0,0.8531
+Naive Bayes,0,Fatal,0.0172,0.9706,0.0339
+Naive Bayes,1,Serious,0.2051,0.0083,0.0159
+Naive Bayes,2,Slight,0.8329,0.1484,0.2519

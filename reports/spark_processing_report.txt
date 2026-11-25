@@ -1,0 +1,48 @@
+================================================================================
+               APACHE SPARK (PYSPARK) DATA PROCESSING REPORT
+   Academic B.Tech Project: Road Accident Severity Prediction with PySpark & Power BI
+================================================================================
+
+1. EXECUTION ENVIRONMENT & SPARK ARCHITECTURE
+   - Framework                : Apache Spark 3.5.9 (PySpark MLlib)
+   - Execution Mode           : Local Multi-Threaded Execution (Windows)
+   - Spark Master             : local[*]
+   - Ingest Source            : dataset/processed/accident_final_100k.parquet
+   - Columnar Storage Engine  : Apache Parquet (Snappy Compressed)
+
+2. DATASET INGESTION & PHASE 1 CONFORMANCE AUDIT
+   - Total Processed Rows     : 100,000
+   - Total Column Count       : 39
+   - Verification Status      : PERFECT MATCH CONFIRMED: PySpark loaded exactly 100,000 records with zero null values, zero duplicates, and identical severity distribution (Fatal: 1,431, Serious: 24,812, Slight: 73,757).
+
+3. DATA INTEGRITY & QUALITY METRICS
+   - Exact Duplicate Rows     : 0
+   - Unique Collision Indices : 100,000
+   - Duplicate Collision IDs  : 0
+   - Columns with NaN / Nulls : 0
+   - Null Value Status        : ZERO NULLS ACROSS ALL 100,000 RECORDS
+
+4. TARGET VARIABLE DISTRIBUTION (collision_severity)
+   - Class 1 (Fatal)   :   1,431 rows (  1.43%)
+   - Class 2 (Serious) :  24,812 rows ( 24.81%)
+   - Class 3 (Slight)  :  73,757 rows ( 73.76%)
+   - Total Records     : 100,000 (100.00%)
+
+5. FEATURE SCHEMA CLASSIFICATION
+   - Numerical Features   (24): ['collision_year', 'longitude', 'latitude', 'police_force', 'collision_severity', 'number_of_vehicles', 'number_of_casualties', 'day_of_week', 'first_road_class', 'road_type', 'speed_limit', 'junction_detail', 'junction_control', 'pedestrian_crossing', 'light_conditions', 'weather_conditions', 'road_surface_conditions', 'carriageway_hazards', 'urban_or_rural_area', 'did_police_officer_attend_scene_of_accident', 'trunk_road_flag', 'month', 'hour', 'weekend_indicator']
+   - Categorical Features (15): ['collision_index', 'date', 'time', 'local_authority_ons_district', 'month_name', 'time_of_day', 'day_name', 'weekday_weekend', 'severity_name', 'road_type_name', 'urban_rural_name', 'weather_group', 'road_surface_group', 'light_group', 'speed_zone']
+
+6. DESCRIPTIVE STATISTICS FOR KEY NUMERICAL ATTRIBUTES
+   ---------------------------------------------------------------------------
+   Metric        speed_limitnumber_of_vehicles           hour          month       latitude      longitude
+   ---------------------------------------------------------------------------
+   count           100000.00      100000.00      100000.00      100000.00      100000.00      100000.00
+   mean                35.78           1.81          13.73           6.61          52.38          -1.22
+   stddev              14.65           0.69           5.12           3.42           1.31           1.36
+   min                 20.00           1.00           0.00           1.00          49.91          -7.42
+   max                 70.00          17.00          23.00          12.00          60.35           1.76
+   ---------------------------------------------------------------------------
+
+================================================================================
+Spark data processing and validation report generated successfully.
+================================================================================

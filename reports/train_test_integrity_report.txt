@@ -1,0 +1,48 @@
+==========================================================================================
+                 TRAIN-TEST PARTITION INTEGRITY & ISOLATION AUDIT REPORT
+  Road Accident Severity Prediction: Stratified Split, Disjointness & Class Weighting
+==========================================================================================
+Audit Execution Timestamp: 2026-11-12 01:02:13
+Auditor: Senior Apache Spark Specialist & ML Engineer
+
+1. PARTITION DISJOINTNESS & RECORD ISOLATION
+------------------------------------------------------------------------------------------
+Total Population Size     : 100,000 collision records (100% accounted for)
+Training Partition Size   : 79,901 records (79.90%)
+Held-Out Test Size        : 20,099 records (20.10%)
+Record Overlap Count      : 0 records (Train intersection Test)
+Disjointness Verification : PASS (Partitions are 100% disjoint, zero leakage)
+Test Subset Validity      : PASS (All 20,099 test collisions belong to 100k population)
+Ground-Truth Label Parity : PASS (Test prediction ground truth perfectly matches 100k records)
+
+2. STRATIFIED MULTICLASS SUPPORT AUDIT
+------------------------------------------------------------------------------------------
+Class / Severity         Train Support    Train Pct    Test Support     Test Pct   Total Support
+------------------------------------------------------------------------------------------
+Fatal (Class 1 / 0.0)            1,125       1.408%             306       1.522%           1,431
+Serious (Class 2 / 1.0)         19,969      24.992%           4,843      24.096%          24,812
+Slight (Class 3 / 2.0)          58,807      73.600%          14,950      74.382%          73,757
+------------------------------------------------------------------------------------------
+Total                           79,901      100.00%          20,099      100.00%         100,000
+
+Observation: Proportions of Fatal (1.41% vs 1.52%), Serious (24.99% vs 24.10%), and Slight
+(73.60% vs 74.38%) demonstrate rigorous stratified sampling preserving real-world class imbalance.
+
+3. CLASS WEIGHTING PROTOCOL AUDIT (Calculated Strictly on Training Data)
+------------------------------------------------------------------------------------------
+Formula: Weight_c = Total_Train / (Num_Classes * Count_c)
+- Fatal Class Weight (w_0)   : 23.6744 (Derived from 1,125 train cases | w = 23.67)
+- Serious Class Weight (w_1) : 1.3338 (Derived from 19,969 train cases | w = 1.33)
+- Slight Class Weight (w_2)  : 0.4529 (Derived from 58,807 train cases | w = 0.45)
+- Test Set Weight Leakage    : PASS (Zero test records utilized in computing loss weights)
+
+4. PREPROCESSING & HYPERPARAMETER ESTIMATOR ISOLATION
+------------------------------------------------------------------------------------------
+- StringIndexer Fit Boundary : StringIndexer models fitted strictly on train_raw (79,901 rows).
+- OneHotEncoder Fit Boundary : OneHotEncoder fitted strictly on indexed train_raw.
+- Hyperparameter Search Split: 80/20 train/validation split executed internally on train_df
+  (63,921 sub-train rows, 15,980 validation rows). Final held-out test partition NEVER accessed.
+
+==========================================================================================
+TRAIN-TEST INTEGRITY STATUS: 100% PASSED WITH RIGOROUS PARTITION ISOLATION
+==========================================================================================

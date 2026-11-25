@@ -1,0 +1,22 @@
+model_name,actual_class,pred_fatal,pred_serious,pred_slight,row_total
+Majority-Class Baseline,Fatal (True),0,0,306,306
+Majority-Class Baseline,Serious (True),0,0,4843,4843
+Majority-Class Baseline,Slight (True),0,0,14950,14950
+Logistic Regression,Fatal (True),189,60,57,306
+Logistic Regression,Serious (True),1534,1597,1712,4843
+Logistic Regression,Slight (True),3438,3718,7794,14950
+Decision Tree,Fatal (True),1,20,285,306
+Decision Tree,Serious (True),6,199,4638,4843
+Decision Tree,Slight (True),9,352,14589,14950
+Random Forest,Fatal (True),135,84,87,306
+Random Forest,Serious (True),841,1598,2404,4843
+Random Forest,Slight (True),1826,3177,9947,14950
+Gradient-Boosted Trees,Fatal (True),0,19,287,306
+Gradient-Boosted Trees,Serious (True),2,99,4742,4843
+Gradient-Boosted Trees,Slight (True),0,117,14833,14950
+Multilayer Perceptron,Fatal (True),0,0,306,306
+Multilayer Perceptron,Serious (True),0,0,4843,4843
+Multilayer Perceptron,Slight (True),0,0,14950,14950
+Naive Bayes,Fatal (True),297,2,7,306
+Naive Bayes,Serious (True),4365,40,438,4843
+Naive Bayes,Slight (True),12579,153,2218,14950

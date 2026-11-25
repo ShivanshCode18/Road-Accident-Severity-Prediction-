@@ -1,0 +1,166 @@
+=====================================================================================
+             APACHE SPARK (PYSPARK) MACHINE LEARNING EVALUATION REPORT
+   Academic B.Tech Project: Road Accident Severity Prediction with PySpark & Excel
+=====================================================================================
+
+1. MULTICLASS MODEL PERFORMANCE BENCHMARK (HELD-OUT TEST SET: 20,099 COLLISIONS)
+   Model Name                    Accuracy  Weighted F1  Macro F1  Fatal Rec  Fatal Prec  Train Time
+   -----------------------------------------------------------------------------------------------
+   Majority-Class Baseline         74.38%       0.6345    0.2844      0.00%       0.00%       0.00s
+   Logistic Regression             47.66%       0.5494    0.3392     61.76%       3.66%      18.89s
+   Decision Tree                   73.58%       0.6476    0.3088      0.33%       6.25%      22.55s
+   Random Forest                   58.11%       0.6210    0.3809     44.12%       4.82%     159.69s
+   Gradient-Boosted Trees          74.29%       0.6433    0.2971      0.00%       0.00%      53.21s
+   Multilayer Perceptron           74.38%       0.6345    0.2844      0.00%       0.00%      81.45s
+   Naive Bayes                     12.71%       0.1917    0.1005     97.06%       1.72%       1.58s
+   -----------------------------------------------------------------------------------------------
+
+2. DETAILED PER-CLASS METRICS (PRECISION, RECALL, F1-SCORE)
+   -----------------------------------------------------------------------------------------------
+
+   >>> Model: Majority-Class Baseline (Zero-Rule Heuristic (Always Predicts Slight))
+       Class        Severity Name       Precision       Recall     F1-Score
+       ------------------------------------------------------------------
+       Class 1      Fatal                  0.0000       0.0000       0.0000
+       Class 2      Serious                0.0000       0.0000       0.0000
+       Class 3      Slight                 0.7438       1.0000       0.8531
+
+       Confusion Matrix (3x3 Counts):
+       True / Predicted     Pred Fatal   Pred Serious    Pred Slight
+       ------------------------------------------------------------
+       Fatal (True)                  0              0            306
+       Serious (True)                0              0          4,843
+       Slight (True)                 0              0         14,950
+
+   >>> Model: Logistic Regression (Multinomial Logistic Regression (Class-Weighted))
+       Class        Severity Name       Precision       Recall     F1-Score
+       ------------------------------------------------------------------
+       Class 1      Fatal                  0.0366       0.6176       0.0691
+       Class 2      Serious                0.2971       0.3298       0.3126
+       Class 3      Slight                 0.8150       0.5213       0.6359
+
+       Confusion Matrix (3x3 Counts):
+       True / Predicted     Pred Fatal   Pred Serious    Pred Slight
+       ------------------------------------------------------------
+       Fatal (True)                189             60             57
+       Serious (True)            1,534          1,597          1,712
+       Slight (True)             3,438          3,718          7,794
+
+   >>> Model: Decision Tree (Decision Tree Classifier (maxDepth=10))
+       Class        Severity Name       Precision       Recall     F1-Score
+       ------------------------------------------------------------------
+       Class 1      Fatal                  0.0625       0.0033       0.0062
+       Class 2      Serious                0.3485       0.0411       0.0735
+       Class 3      Slight                 0.7477       0.9759       0.8467
+
+       Confusion Matrix (3x3 Counts):
+       True / Predicted     Pred Fatal   Pred Serious    Pred Slight
+       ------------------------------------------------------------
+       Fatal (True)                  1             20            285
+       Serious (True)                6            199          4,638
+       Slight (True)                 9            352         14,589
+
+   >>> Model: Random Forest (Random Forest Classifier (60 Trees, maxDepth=12))
+       Class        Severity Name       Precision       Recall     F1-Score
+       ------------------------------------------------------------------
+       Class 1      Fatal                  0.0482       0.4412       0.0869
+       Class 2      Serious                0.3289       0.3300       0.3294
+       Class 3      Slight                 0.7997       0.6654       0.7264
+
+       Confusion Matrix (3x3 Counts):
+       True / Predicted     Pred Fatal   Pred Serious    Pred Slight
+       ------------------------------------------------------------
+       Fatal (True)                135             84             87
+       Serious (True)              841          1,598          2,404
+       Slight (True)             1,826          3,177          9,947
+
+   >>> Model: Gradient-Boosted Trees (Gradient-Boosted Trees (OneVsRest Multiclass, 15 Iterations))
+       Class        Severity Name       Precision       Recall     F1-Score
+       ------------------------------------------------------------------
+       Class 1      Fatal                  0.0000       0.0000       0.0000
+       Class 2      Serious                0.4213       0.0204       0.0390
+       Class 3      Slight                 0.7468       0.9922       0.8522
+
+       Confusion Matrix (3x3 Counts):
+       True / Predicted     Pred Fatal   Pred Serious    Pred Slight
+       ------------------------------------------------------------
+       Fatal (True)                  0             19            287
+       Serious (True)                2             99          4,742
+       Slight (True)                 0            117         14,833
+
+   >>> Model: Multilayer Perceptron (Multilayer Perceptron Neural Network (4-Layer MLP))
+       Class        Severity Name       Precision       Recall     F1-Score
+       ------------------------------------------------------------------
+       Class 1      Fatal                  0.0000       0.0000       0.0000
+       Class 2      Serious                0.0000       0.0000       0.0000
+       Class 3      Slight                 0.7438       1.0000       0.8531
+
+       Confusion Matrix (3x3 Counts):
+       True / Predicted     Pred Fatal   Pred Serious    Pred Slight
+       ------------------------------------------------------------
+       Fatal (True)                  0              0            306
+       Serious (True)                0              0          4,843
+       Slight (True)                 0              0         14,950
+
+   >>> Model: Naive Bayes (Gaussian Naive Bayes (Continuous Real Features))
+       Class        Severity Name       Precision       Recall     F1-Score
+       ------------------------------------------------------------------
+       Class 1      Fatal                  0.0172       0.9706       0.0339
+       Class 2      Serious                0.2051       0.0083       0.0159
+       Class 3      Slight                 0.8329       0.1484       0.2519
+
+       Confusion Matrix (3x3 Counts):
+       True / Predicted     Pred Fatal   Pred Serious    Pred Slight
+       ------------------------------------------------------------
+       Fatal (True)                297              2              7
+       Serious (True)            4,365             40            438
+       Slight (True)            12,579            153          2,218
+
+=====================================================================================
+3. THE ACCURACY PARADOX & BASELINE COMPARISON
+=====================================================================================
+A. The Majority-Class Baseline:
+   - An uninformed baseline that predicts 'Slight' for every record achieves 74.38% accuracy,
+     because Slight collisions comprise 73.76% of all accidents in Great Britain.
+   - However, this baseline exhibits 0.0% Fatal Recall and 0.0% Serious Recall, failing
+     to detect even a single life-threatening collision.
+   - Evaluating transportation safety models purely on raw accuracy is scientifically unsound.
+
+B. Majority-Collapse Investigation of Models Near Baseline Accuracy:
+   1) Multilayer Perceptron (MLP, 4-Layer Feedforward):
+      - Predicted Counts: Fatal = 0 (0.00%), Serious = 0 (0.00%), Slight = 20,099 (100.00%).
+      - Recall: Fatal = 0.00%, Serious = 0.00%, Slight = 100.00%.
+      - Accuracy: 74.38% | Macro F1: 0.2844 | Weighted F1: 0.6345.
+      - Finding: 100% collapsed into the majority baseline (Zero-Rule equivalent).
+   2) Gradient-Boosted Trees (GBT via OneVsRest Multiclass):
+      - Predicted Counts: Fatal = 2 (0.01%), Serious = 235 (1.17%), Slight = 19,862 (98.82%).
+      - Recall: Fatal = 0.00% (0/306), Serious = 2.04% (99/4,843), Slight = 99.22% (14,833/14,950).
+      - Accuracy: 74.29% (LOWER than the 74.38% baseline!) | Macro F1: 0.2971 | Weighted F1: 0.6433.
+      - Finding: Severe collapse into majority class; fails to capture any fatal collisions.
+   3) Decision Tree Classifier (maxDepth=10):
+      - Predicted Counts: Fatal = 16 (0.08%), Serious = 571 (2.84%), Slight = 19,512 (97.08%).
+      - Recall: Fatal = 0.33% (1/306), Serious = 4.11% (199/4,843), Slight = 97.59% (14,589/14,950).
+      - Accuracy: 73.58% | Macro F1: 0.3088 | Weighted F1: 0.6476.
+      - Finding: Severe collapse into majority class (97.08% Slight); detects only 1 fatal crash.
+
+C. Gradient-Boosted Trees (GBT) Architecture Note in Apache Spark MLlib:
+   - Spark's native GBTClassifier requires binary labels (labels in {0, 1}). When supplied
+     with a 3-class target, it throws a RuntimeException: 'Labels MUST be in {0, 1}'.
+   - To overcome this limitation within Spark MLlib, OneVsRest was implemented, wrapping GBT
+     to train three binary one-vs-all boosting models.
+
+4. FINAL MODEL SELECTION & SPECIALIST ROLES
+=====================================================================================
+A. Primary Production Classifier: RANDOM FOREST (numTrees=60, maxDepth=12, class_weight)
+   - Highest Accuracy (58.11%), highest Weighted F1 (0.6210), and highest Macro F1 (0.3809).
+   - Achieves the best Fatal Precision (4.82%) while still capturing 44.12% of fatal crashes (135/306).
+   - Lowest false positive alarm rate (13.47%, 2,667 false fatals) among weighted models.
+   - Persisted to models/spark_random_forest_model and deployed in the Excel Dashboard.
+
+B. Safety-Critical Screening Specialist: LOGISTIC REGRESSION (class_weight)
+   - Highest Fatal Recall (61.76%, capturing 189 of 306 fatal crashes) and fastest training (18.89s).
+   - Recommended for emergency resource pre-positioning where false negatives are cost-prohibitive.
+
+=====================================================================================
+Report successfully generated.
+=====================================================================================

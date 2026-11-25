@@ -1,0 +1,116 @@
+================================================================================
+             FEATURE ENGINEERING AUDIT & ARCHITECTURE REPORT
+        Road Accident Severity Prediction - STATS19 2025 Collisions
+================================================================================
+
+1. FEATURE SELECTION PHILOSOPHY & LEAKAGE PREVENTION PRINCIPLES
+--------------------------------------------------------------------------------
+In traffic crash injury modeling, feature engineering must be strictly aligned with
+the operational state known at or prior to collision occurrence. Any post-crash
+outcome (such as emergency room admissions, casualty counts, or police dispatch logs)
+constitutes direct target leakage, creating artificially inflated evaluation metrics
+that catastrophically fail in real-world deployment.
+
+The following attributes are strictly excluded from predictive features:
+1. 'number_of_casualties': Outcome consequence of collision severity.
+2. 'enhanced_severity_collision': Alternative DfT post-hoc severity classification.
+3. 'collision_injury_based': Indicator of whether injury was recorded post-hoc.
+4. 'collision_adjusted_severity_serious': DfT imputed probability of serious injury.
+5. 'collision_adjusted_severity_slight': DfT imputed probability of slight injury.
+6. 'did_police_officer_attend_scene_of_accident': Post-accident emergency response.
+7. 'collision_index', 'collision_ref_no': Unique incident identifiers.
+8. 'collision_year': Constant value (2025) providing zero variance.
+
+2. CONTINUOUS CYCLICAL TEMPORAL ENCODINGS
+--------------------------------------------------------------------------------
+Standard linear integer representations of time (hour: 0..23, month: 1..12) introduce
+an artificial mathematical discontinuity: hour 23 and hour 0 appear 23 units apart
+instead of 1 unit apart; month 12 (December) and month 1 (January) appear 11 units
+apart instead of 1 unit apart.
+
+To preserve circular continuity across midnight and the New Year transition, continuous
+sine and cosine transformations were implemented:
+
+1. sin_hour = sin(2 * pi * hour / 24.0)
+   Domain: [-1.0, 1.0]. Captures the cyclical diurnal rhythm.
+2. cos_hour = cos(2 * pi * hour / 24.0)
+   Domain: [-1.0, 1.0]. Complements sin_hour to establish a unique 2D coordinate on the
+   24-hour circle.
+3. sin_month = sin(2 * pi * month / 12.0)
+   Domain: [-1.0, 1.0]. Captures seasonal progression (winter vs summer).
+4. cos_month = cos(2 * pi * month / 12.0)
+   Domain: [-1.0, 1.0]. Complements sin_month for circular calendar continuity.
+
+3. DOMAIN-SPECIFIC HAZARD INTERACTIONS
+--------------------------------------------------------------------------------
+Empirical road safety research demonstrates that accident severity is driven by
+compounding physical risk factors rather than isolated variables. Five cross-domain
+interaction features were engineered:
+
+1. road_speed_inter = road_type_name + "_" + speed_zone
+   Rationale: Differentiates speed effects by road geometry. For instance, high speed
+   (60-70 mph) on a Single Carriageway presents extreme head-on collision danger,
+   whereas 70 mph on a Dual Carriageway benefits from physical central reservation barriers.
+
+2. weather_surface_inter = weather_group + "_" + road_surface_group
+   Rationale: Captures dynamic tire-pavement friction states. Adverse weather (Raining,
+   Snow/Ice) interacting with Wet or Icy pavement significantly lengthens braking distance
+   and increases impact velocities.
+
+3. light_time_inter = light_group + "_" + time_of_day
+   Rationale: Unlit darkness during late night reflects combined visibility deprivation,
+   driver fatigue, and potential alcohol impairment, whereas darkness with lights lit
+   during evening rush hour represents congested, lower-speed urban travel.
+
+4. weekend_time_inter = weekday_weekend + "_" + time_of_day
+   Rationale: Distinguishes weekend night leisure travel (disproportionately associated
+   with high-speed, severe collisions) from weekday morning and evening work commuting.
+
+5. urban_rural_speed_inter = urban_rural_name + "_" + speed_zone
+   Rationale: Rural high-speed corridors account for over 61% of all UK traffic fatalities
+   due to undivided roadways, roadside obstacles, and extended emergency medical response times.
+   This feature isolates rural high-speed routes from dense urban networks.
+
+6. high_speed_single_carriageway (Binary: 1.0 / 0.0)
+   Definition: (road_type_name == "Single carriageway") & (speed_limit >= 60)
+   Rationale: Single carriageways with speed limits >= 60 mph represent the single
+   highest fatality hazard profile identified in UK Department for Transport STATS19 bulletins.
+
+4. COMPLETE FEATURE PREDICTOR ARCHITECTURE
+--------------------------------------------------------------------------------
+Categorical Predictors (16 total, processed via StringIndexer -> OneHotEncoder):
+- time_of_day
+- day_name
+- road_type_name
+- urban_rural_name
+- weather_group
+- road_surface_group
+- light_group
+- speed_zone
+- junction_detail
+- junction_control
+- police_force
+- road_speed_inter          [NEW INTERACTION]
+- weather_surface_inter     [NEW INTERACTION]
+- light_time_inter          [NEW INTERACTION]
+- weekend_time_inter        [NEW INTERACTION]
+- urban_rural_speed_inter   [NEW INTERACTION]
+
+Numerical Predictors (12 total, assembled via VectorAssembler):
+- hour
+- month
+- speed_limit
+- number_of_vehicles
+- latitude
+- longitude
+- weekend_indicator
+- sin_hour                  [NEW CYCLICAL]
+- cos_hour                  [NEW CYCLICAL]
+- sin_month                 [NEW CYCLICAL]
+- cos_month                 [NEW CYCLICAL]
+- high_speed_single_carriageway [NEW SAFETY INDICATOR]
+
+Total Vector Dimensionality: 16 OHE Vector Blocks + 12 Numerical Features.
+Target Variable: label (0.0 = Fatal, 1.0 = Serious, 2.0 = Slight).
+================================================================================
+

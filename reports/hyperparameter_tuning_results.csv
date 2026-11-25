@@ -1,0 +1,13 @@
+model_family,parameters,val_accuracy,val_weighted_f1,val_fatal_recall,val_fatal_precision,val_fatal_f1,val_serious_recall,val_slight_recall,train_time_sec
+Logistic Regression,"reg=0.001, elNet=0.0, wCol=class_weight",47.29,0.5429,56.28,0.0344,0.0648,33.42,51.95,11.15
+Logistic Regression,"reg=0.01, elNet=0.0, wCol=class_weight",47.25,0.5426,54.25,0.0332,0.0626,33.32,51.98,5.18
+Logistic Regression,"reg=0.1, elNet=0.0, wCol=class_weight",47.47,0.5455,53.85,0.0323,0.0609,32.21,52.68,2.99
+Logistic Regression,"reg=0.01, elNet=0.5, wCol=class_weight",46.49,0.5355,54.66,0.0324,0.0613,31.03,51.72,6.15
+Logistic Regression,"reg=0.01, elNet=0.0, wCol=class_weight_sqrt",71.1,0.6618,2.02,0.0725,0.0316,16.44,91.67,5.08
+Decision Tree,"depth=6, minInst=20, imp=gini",72.94,0.6245,0.0,0.0,0.0,1.97,99.3,7.21
+Decision Tree,"depth=8, minInst=10, imp=gini",72.61,0.6309,0.0,0.0,0.0,3.89,98.18,9.51
+Decision Tree,"depth=10, minInst=5, imp=gini",72.36,0.6338,0.4,0.1111,0.0078,4.97,97.44,10.19
+Decision Tree,"depth=8, minInst=10, imp=entropy",72.83,0.6278,0.0,0.0,0.0,2.88,98.83,9.66
+Random Forest,"trees=30, depth=10, minInst=5",54.0,0.5874,48.18,0.0413,0.0761,29.08,62.84,32.58
+Random Forest,"trees=50, depth=10, minInst=5",54.08,0.5879,48.99,0.0415,0.0765,28.42,63.15,51.63
+Random Forest,"trees=60, depth=12, minInst=5",57.56,0.6105,43.72,0.0513,0.0918,31.52,66.96,86.72

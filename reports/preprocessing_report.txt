@@ -1,0 +1,99 @@
+================================================================================
+                    PREPROCESSING REPORT: UK STATS19 (2025)
+   Academic B.Tech Project: Road Accident Severity Prediction with PySpark & Excel Dashboard
+================================================================================
+
+1. RECORD COUNT AUDIT
+   - Original Raw Records     : 101,525
+   - Cleaned Valid Records    : 101,523
+   - Final Processed Records  : 100,000
+   - Sampling Methodology     : Stratified Random Sampling (Preserving Severity Classes)
+   - Random Seed              : 42
+
+2. FEATURE DIMENSIONALITY AUDIT
+   - Original Column Count    : 44
+   - Cleaned Column Count     : 25
+   - Final Column Count       : 39
+
+3. DATA CLEANING & HYGIENE OPERATIONS
+   - Exact Duplicate Rows Removed      : 0
+   - Missing Coordinate Rows Dropped   : 2
+   - Out of UK Bounding Box Rows Dropped: 0
+   - Invalid Target Severity Rows      : 0
+   - Invalid Speed Limit Rows Handled  : 0
+
+4. ENGINEERED FEATURES CREATED
+   Total Features Created: 14
+   - month
+   - month_name
+   - hour
+   - time_of_day
+   - day_name
+   - weekend_indicator
+   - weekday_weekend
+   - severity_name
+   - road_type_name
+   - urban_rural_name
+   - weather_group
+   - road_surface_group
+   - light_group
+   - speed_zone
+
+5. EXCLUDED COLUMNS & ACADEMIC JUSTIFICATION (PREVENTING DATA LEAKAGE)
+   Total Columns Excluded: 23
+   - local_authority_district:
+       100% missing values (-1); deprecated in official DfT STATS19 in favor of ONS district codes.
+   - junction_detail_historic:
+       >86% missing (-1); deprecated historic field replaced by modernized junction_detail.
+   - pedestrian_crossing_human_control_historic:
+       >86% missing (-1); deprecated historic field.
+   - pedestrian_crossing_physical_facilities_historic:
+       >86% missing (-1); deprecated historic field.
+   - special_conditions_at_site:
+       >86% missing (-1); deprecated historic field.
+   - carriageway_hazards_historic:
+       >86% missing (-1); deprecated historic field.
+   - local_authority_highway:
+       Administrative identifier redundant with local_authority_ons_district.
+   - local_authority_highway_current:
+       Administrative identifier redundant with local_authority_ons_district.
+   - collision_year:
+       Constant value (2025) across all records; provides zero predictive variance.
+   - collision_index:
+       Unique incident identifier; retained in Excel dashboard and final dataset for audit trail, excluded from predictive ML features.
+   - collision_ref_no:
+       Secondary accident identifier redundant with collision_index.
+   - location_easting_osgr:
+       Spatial coordinate redundant with WGS84 longitude.
+   - location_northing_osgr:
+       Spatial coordinate redundant with WGS84 latitude.
+   - first_road_number:
+       High cardinality road route number; leads to categorical overfitting.
+   - second_road_class:
+       Largely unpopulated or 0 when collision is not at a multi-road junction.
+   - second_road_number:
+       High cardinality road route number; mostly 0 or missing.
+   - lsoa_of_accident_location:
+       Census lower layer super output area; excessively high cardinality (>30,000 distinct codes).
+   - did_police_officer_attend_scene_of_accident:
+       Post-accident response variable; not known prior to or at time of incident.
+   - number_of_casualties:
+       Post-accident outcome information (Data Leakage for severity prediction). Excluded from ML modeling; retained in Excel dashboard dataset for KPI reporting.
+   - enhanced_severity_collision:
+       Direct target leakage; represents an alternative post-hoc severity metric.
+   - collision_injury_based:
+       Direct target leakage; records whether severity was injury-based.
+   - collision_adjusted_severity_serious:
+       Direct target leakage; DfT statistical model adjustment probability for serious severity.
+   - collision_adjusted_severity_slight:
+       Direct target leakage; DfT statistical model adjustment probability for slight severity.
+
+6. FINAL TARGET VARIABLE DISTRIBUTION (collision_severity)
+   Total Observations: 100,000
+   Class 1 (Fatal)   :   1,431 (  1.43%)
+   Class 2 (Serious) :  24,812 ( 24.81%)
+   Class 3 (Slight)  :  73,757 ( 73.76%)
+
+================================================================================
+Report generated successfully by automated preprocessing pipeline.
+================================================================================

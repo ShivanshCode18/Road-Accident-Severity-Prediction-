@@ -1,0 +1,77 @@
+==========================================================================================
+                    DATA LEAKAGE & FEATURE ISOLATION AUDIT REPORT
+  Road Accident Severity Prediction: Target Leakage and Post-Outcome Variable Audit
+==========================================================================================
+Audit Execution Timestamp: 2026-11-12 01:02:12
+Auditor: Senior Machine Learning Engineer & Spark Specialist
+
+1. EXPLICIT EXCLUSION AUDIT OF SENSITIVE / POST-CRASH ATTRIBUTES
+------------------------------------------------------------------------------------------
+Column Name                                Predictor Status     Audit Result
+------------------------------------------------------------------------------------------
+number_of_casualties                       NOT IN MODEL         PASS (Excluded)
+enhanced_severity_collision                NOT IN MODEL         PASS (Excluded)
+collision_adjusted_severity_serious        NOT IN MODEL         PASS (Excluded)
+collision_adjusted_severity_slight         NOT IN MODEL         PASS (Excluded)
+did_police_officer_attend_scene_of_accident NOT IN MODEL         PASS (Excluded)
+collision_index                            NOT IN MODEL         PASS (Excluded)
+collision_ref_no                           NOT IN MODEL         PASS (Excluded)
+collision_year                             NOT IN MODEL         PASS (Excluded)
+severity_name                              NOT IN MODEL         PASS (Excluded)
+collision_severity                         NOT IN MODEL         PASS (Excluded)
+------------------------------------------------------------------------------------------
+
+2. ACTIVE PREDICTOR SPACE COMPOSITION (195-DIMENSIONAL VECTOR)
+------------------------------------------------------------------------------------------
+Total Active Predictor Columns: 28 (16 Categorical + 12 Numerical)
+
+Categorical Predictors (16 Columns, Transformed via StringIndexer + OneHotEncoder):
+  - time_of_day
+  - day_name
+  - road_type_name
+  - urban_rural_name
+  - weather_group
+  - road_surface_group
+  - light_group
+  - speed_zone
+  - junction_detail
+  - junction_control
+  - police_force
+  - road_speed_inter
+  - weather_surface_inter
+  - light_time_inter
+  - weekend_time_inter
+  - urban_rural_speed_inter
+
+Numerical Predictors (12 Columns, Assembled into VectorAssembler):
+  - hour
+  - month
+  - speed_limit
+  - number_of_vehicles
+  - latitude
+  - longitude
+  - weekend_indicator
+  - sin_hour
+  - cos_hour
+  - sin_month
+  - cos_month
+  - high_speed_single_carriageway
+
+3. KPI & DASHBOARD PRESERVATION PROTOCOL
+------------------------------------------------------------------------------------------
+- 'number_of_casualties' Preservation: Retained in dataset/processed/excel_dashboard_dataset.csv
+  and dataset/processed/accident_final_100k.csv strictly for descriptive analytical KPIs
+  and total casualty statistics in Excel Dashboard Sheet 1 and Sheet 6.
+- Strict Training Boundary: Excluded from the VectorAssembler stage in models/spark_feature_pipeline,
+  ensuring the MLlib classification models receive ZERO casualty information during training.
+
+4. TARGET ISOLATION & ENCODING PROTOCOL
+------------------------------------------------------------------------------------------
+- Target Column: 'collision_severity' (1=Fatal, 2=Serious, 3=Slight)
+- Spark Label Column: 'label' (0.0=Fatal, 1.0=Serious, 2.0=Slight)
+- Target Separation: Isolated as the single prediction target; zero direct target encoding
+  or target-derived proxies exist within the feature matrix.
+
+==========================================================================================
+DATA LEAKAGE AUDIT STATUS: 100% PASSED - ZERO TARGET LEAKAGE DETECTED
+==========================================================================================

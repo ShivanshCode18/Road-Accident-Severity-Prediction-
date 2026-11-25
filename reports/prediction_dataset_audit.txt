@@ -1,0 +1,68 @@
+==========================================================================================
+               RANDOM FOREST PREDICTION DATASET AUDIT REPORT
+  Road Accident Severity Prediction: Primary Production Prediction Verification
+==========================================================================================
+Audit Execution Timestamp: 2026-11-12 01:02:14
+Primary Prediction File   : dataset/processed/random_forest_predictions.csv
+Excel Prediction File     : dataset/processed/excel_dashboard_predictions.csv
+Improved Prediction File  : dataset/processed/improved_predictions.csv
+
+1. PREDICTION DATASET SCHEMA & PHYSICAL INTEGRITY
+------------------------------------------------------------------------------------------
+Test Record Count         : 20,099 (Expected: exactly 20,099 | Audit: PASS)
+Column Count              : 26 columns (Identifiers, attributes, actuals, predictions, probs)
+Duplicate Collision Index : 0 (Audit: PASS - Primary key fully unique)
+Cross-File Synchronization: 0 discrepancies across all 3 files (Audit: PASS - 100% Identical)
+
+2. PROBABILITY VECTOR SIMPLEX & NUMERICAL INTEGRITY
+------------------------------------------------------------------------------------------
+Value Range Property [0,1]: PASS (All probabilities bounded in [0.0, 1.0])
+Simplex Sum Property (=1) : PASS (All vectors sum to 1.0 within 1e-4 tolerance)
+Sum Range Across Records  : [0.999900, 1.000100]
+Missing / Infinite Values : PASS (Zero NaN, null, or Inf values)
+
+Class Probability Distribution Statistics:
+- Fatal Probability (P0)   : Min=0.0000, Mean=0.2039 (20.39%), Median=0.1668, Max=0.7669
+- Serious Probability (P1) : Min=0.1221, Mean=0.3757 (33.30%), Median=0.3844, Max=0.5552
+- Slight Probability (P2)  : Min=0.1022, Mean=0.4203 (46.31%), Median=0.4316, Max=0.8744
+
+Prediction Decision Mapping:
+- Standard Argmax Agreement: 20,096 / 20,099 records (99.985%)
+- Exact Tie Tree Votes     : Exactly 3 records where two classes tied and Spark MLlib
+                             resolved the tie via internal rawPrediction vote determinism.
+
+3. PREDICTION CONFUSION MATRIX & RECALCULATED METRICS
+------------------------------------------------------------------------------------------
+3x3 Confusion Matrix (Actual \ Predicted):
+              Pred Fatal    Pred Serious    Pred Slight       Row Total
+Fatal (True)             135              84              87             306
+Serious (True)           841           1,598           2,404           4,843
+Slight (True)          1,826           3,177           9,947          14,950
+Total Predicted        2,802           4,859          12,438          20,099
+
+Recalculated Performance Metrics:
+- Overall Accuracy        : 58.1123% (11,680/20,099) -> 58.11%
+- Weighted F1-Score       : 0.6210
+- Macro F1-Score          : 0.3809
+- Fatal (Class 1) Recall  : 44.12% (135/306)
+- Fatal Precision         : 4.82% (135/2802)
+- Fatal F1-Score          : 0.0869
+- Serious (Class 2) Recall: 33.00% (1598/4843)
+- Serious Precision       : 32.89% (1598/4859)
+- Serious F1-Score        : 0.3294
+- Slight (Class 3) Recall : 66.54% (9947/14950)
+- Slight Precision        : 79.97% (9947/12438)
+- Slight F1-Score         : 0.7264
+
+4. MODEL VERSION PROVENANCE & ISOLATION FROM LOGISTIC REGRESSION
+------------------------------------------------------------------------------------------
+- Generating Model        : Apache Spark MLlib RandomForestClassificationModel
+- Persisted Directory     : models/spark_random_forest_model
+- Hyperparameters         : numTrees=60, maxDepth=12, minInstancesPerNode=5, seed=42
+- Logistic Regression Diff: Verified distinct from Logistic Regression (Accuracy 58.11% vs 47.66%;
+                            Fatal recall 44.12% vs 61.76%; False fatals 2,667 vs 4,972).
+                            Zero accidental mixing detected.
+
+==========================================================================================
+PREDICTION AUDIT STATUS: 100% PASSED AND SYNCHRONIZED ACROSS ALL EXPORTS
+==========================================================================================

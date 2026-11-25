@@ -1,0 +1,40 @@
+file_name,file_location,file_format,number_of_records,number_of_columns,file_size_bytes,file_size_formatted,last_modified,status,pipeline_role
+accident_collisions_2025.csv,dataset/raw/accident_collisions_2025.csv,CSV,101525,44,19349153,18.45 MB,2026-11-09 22:31:55,Current,Identical raw clone / simplified naming alias
+dft-road-casualty-statistics-collision-2025.csv,dataset/raw/dft-road-casualty-statistics-collision-2025.csv,CSV,101525,44,19349153,18.45 MB,2026-11-09 22:31:55,Current,Primary Official UK STATS19 2025 raw collisions dataset
+accident_cleaned.csv,dataset/processed/accident_cleaned.csv,CSV,101523,39,20957648,19.99 MB,2026-11-09 23:01:24,Current,Cleaned collision records (2 invalid coordinate records removed)
+accident_final_100k.csv,dataset/processed/accident_final_100k.csv,CSV,100000,39,20643275,19.69 MB,2026-11-09 23:01:26,Current,"Final stratified 100,000-row processed dataset with 39 tabular columns"
+accident_final_100k.parquet,dataset/processed/accident_final_100k.parquet,PARQUET,N/A,N/A,3980420,3.80 MB,2026-11-09 23:01:26,Current,General artifact
+excel_dashboard_dataset.csv,dataset/processed/excel_dashboard_dataset.csv,CSV,100000,32,18099591,17.26 MB,2026-11-09 23:01:28,Current,"Exported 100,000-row fact dataset formatted for Excel dashboard"
+excel_dashboard_predictions.csv,dataset/processed/excel_dashboard_predictions.csv,CSV,20099,26,3633467,3.47 MB,2026-11-12 00:28:40,Current,"Final primary test predictions (Random Forest, 20,099 rows) for Excel Sheet 5"
+improved_predictions.csv,dataset/processed/improved_predictions.csv,CSV,20099,26,3633467,3.47 MB,2026-11-12 00:28:41,Current,Synchronized prediction export for improved model evaluation
+model_performance_metrics.csv,dataset/processed/model_performance_metrics.csv,CSV,3,15,636,0.6 KB,2026-11-12 00:10:19,Current,Verified 3-model performance summary for Excel Sheet 4
+random_forest_predictions.csv,dataset/processed/random_forest_predictions.csv,CSV,20099,26,3633467,3.47 MB,2026-11-12 00:28:40,Current,"Verified Random Forest test predictions (20,099 rows, 60 trees, depth 12)"
+Road_Accident_Severity_Professional_Dashboard.xlsx,dataset/excel/Road_Accident_Severity_Professional_Dashboard.xlsx,XLSX,100k Collisions + 20k Predictions,8 Multi-Tab Worksheets,17531684,16.72 MB,2026-11-12 00:29:04,Current,Interactive Academic Excel Professional Dashboard with Slicers & KPIs
+evaluation_summary.json,models/evaluation_summary.json,JSON,2,JSON Schema,9249,9.0 KB,2026-11-12 00:10:19,Current,Summary evaluation metrics for primary production models
+final_model_metrics.json,models/final_model_metrics.json,JSON,2,JSON Schema,9249,9.0 KB,2026-11-12 00:10:19,Current,Serialized multi-metric performance dictionary for all benchmark models
+spark_feature_pipeline,models/spark_feature_pipeline,SPARK_PIPELINE,N/A,N/A,37076,36.2 KB,2026-11-12 00:25:37,Current,Serialized Apache Spark MLlib 195-dimensional feature transformation pipeline
+spark_logistic_regression_model,models/spark_logistic_regression_model,SPARK_MODEL,N/A,N/A,7841,7.7 KB,2026-11-09 23:26:28,Current,Serialized Apache Spark MLlib Logistic Regression model (class-weighted)
+spark_random_forest_model,models/spark_random_forest_model,SPARK_MODEL,N/A,N/A,2333066,2.22 MB,2026-11-12 00:28:20,Current,"Serialized Apache Spark MLlib Random Forest model (60 trees, depth 12)"
+audit_report.txt,reports/audit_report.txt,TXT,120,Text Lines,6880,6.7 KB,2026-11-11 23:44:11,Current,Technical thesis documentation / audit report
+dashboard_benchmark_report.txt,reports/dashboard_benchmark_report.txt,TXT,58,Text Lines,3307,3.2 KB,2026-11-10 15:27:11,Current,Technical thesis documentation / audit report
+data_quality_report.txt,reports/data_quality_report.txt,TXT,84,Text Lines,3788,3.7 KB,2026-11-10 15:31:53,Current,Technical thesis documentation / audit report
+dataset_inventory_report.csv,reports/dataset_inventory_report.csv,CSV,36,10,6933,6.8 KB,2026-11-12 01:00:38,Current,General artifact
+dataset_quality_audit.txt,reports/dataset_quality_audit.txt,TXT,121,Text Lines,8755,8.5 KB,2026-11-12 01:00:44,Current,Technical thesis documentation / audit report
+feature_engineering_report.txt,reports/feature_engineering_report.txt,TXT,116,Text Lines,5890,5.8 KB,2026-11-11 23:44:12,Current,Technical thesis documentation / audit report
+feature_validation_report.txt,reports/feature_validation_report.txt,TXT,232,Text Lines,12479,12.2 KB,2026-11-12 01:00:48,Current,Technical thesis documentation / audit report
+FINAL_PROJECT_THESIS_REPORT.md,reports/FINAL_PROJECT_THESIS_REPORT.md,MD,338,Text Lines,27425,26.8 KB,2026-11-10 15:33:10,Current,Technical thesis documentation / audit report
+final_verification_report.txt,reports/final_verification_report.txt,TXT,163,Text Lines,12655,12.4 KB,2026-11-12 00:37:39,Current,Technical thesis documentation / audit report
+hyperparameter_tuning_results.csv,reports/hyperparameter_tuning_results.csv,CSV,12,10,1374,1.3 KB,2026-11-11 23:49:18,Current,Validation split hyperparameter grid tuning results across 12 configurations
+improved_classification_report.csv,reports/improved_classification_report.csv,CSV,21,6,1047,1.0 KB,2026-11-12 00:07:26,Superseded by verified reports,Earlier intermediate per-class precision/recall export
+improved_confusion_matrices.csv,reports/improved_confusion_matrices.csv,CSV,21,5,994,1.0 KB,2026-11-12 00:07:26,Superseded by verified_confusion_matrices.csv,Earlier intermediate 7-model confusion matrices export
+improved_model_comparison.csv,reports/improved_model_comparison.csv,CSV,7,20,1559,1.5 KB,2026-11-12 00:07:26,Superseded by verified_model_comparison.csv,Earlier intermediate 7-model comparison export
+model_evaluation_report.txt,reports/model_evaluation_report.txt,TXT,166,Text Lines,11082,10.8 KB,2026-11-12 00:39:05,Current,Technical thesis documentation / audit report
+model_improvement_report.txt,reports/model_improvement_report.txt,TXT,166,Text Lines,11082,10.8 KB,2026-11-12 00:39:17,Current,Technical thesis documentation / audit report
+preprocessing_report.txt,reports/preprocessing_report.txt,TXT,99,Text Lines,4561,4.5 KB,2026-11-10 15:31:48,Current,Technical thesis documentation / audit report
+project_summary.md,reports/project_summary.md,MD,109,Text Lines,8352,8.2 KB,2026-11-10 15:38:09,Current,Technical thesis documentation / audit report
+random_forest_threshold_analysis.csv,reports/random_forest_threshold_analysis.csv,CSV,10,17,2869,2.8 KB,2026-11-12 00:37:39,Current,Verified probability threshold sweep on Random Forest probabilities
+recalculated_threshold_analysis.csv,reports/recalculated_threshold_analysis.csv,CSV,12,15,1324,1.3 KB,2026-11-12 00:16:02,Specialist/Secondary,Intermediate/Specialist Logistic Regression threshold analysis
+spark_processing_report.txt,reports/spark_processing_report.txt,TXT,48,Text Lines,3536,3.5 KB,2026-11-11 23:59:51,Current,Technical thesis documentation / audit report
+verified_confusion_matrices.csv,reports/verified_confusion_matrices.csv,CSV,21,6,1109,1.1 KB,2026-11-12 00:37:38,Current,Authoritative 7-model 3x3 confusion matrices report
+verified_model_comparison.csv,reports/verified_model_comparison.csv,CSV,7,20,1257,1.2 KB,2026-11-12 00:37:38,Current,Authoritative 7-model performance comparison report
+VIVA_PRESENTATION_OUTLINE.md,reports/VIVA_PRESENTATION_OUTLINE.md,MD,206,Text Lines,16045,15.7 KB,2026-11-10 15:34:00,Current,Technical thesis documentation / audit report

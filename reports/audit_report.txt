@@ -1,0 +1,120 @@
+================================================================================
+          PROJECT AUDIT REPORT: ROAD ACCIDENT SEVERITY PREDICTION
+   Academic STATS19 2025 Big Data Machine Learning Pipeline Audit
+================================================================================
+
+1. EXECUTIVE SUMMARY & AUDIT OBJECTIVE
+--------------------------------------------------------------------------------
+This technical audit comprehensively reviews the data preprocessing, target
+leakage safeguards, train-test splitting methodology, Apache Spark MLlib feature
+pipeline, class imbalance handling, and model evaluation routines of the existing
+Road Accident Severity Prediction project.
+
+All existing working components and original outputs were inspected and backed
+up to archive/original_run_backup/ prior to any optimization.
+
+2. VERIFICATION OF PREPROCESSING & TARGET INTEGRITY
+--------------------------------------------------------------------------------
+- Raw Dataset Records: 101,525 rows across 44 attributes.
+- Cleaning Operations:
+  * 2 records with out-of-boundary / null geographic coordinates removed.
+  * 0 exact duplicate rows; 0 duplicate collision_index values.
+  * Stratified downsampling to exactly 100,000 records preserving 1:2:3 ratios.
+- Target Distribution (100,000 records):
+  * Fatal (Severity 1):    1,431 records ( 1.43%)
+  * Serious (Severity 2): 24,812 records (24.81%)
+  * Slight (Severity 3):  73,757 records (73.76%)
+- Target Leakage Check (PASSED):
+  * Post-accident variables ('number_of_casualties', 'enhanced_severity_collision',
+    'collision_injury_based', 'collision_adjusted_severity_serious',
+    'collision_adjusted_severity_slight', 'did_police_officer_attend_scene_of_accident')
+    are strictly excluded from the MLlib predictive feature vector.
+  * 'number_of_casualties' is retained exclusively in dashboard reporting CSVs for
+    casualty KPI aggregation, never as a feature.
+
+3. TRAIN-TEST SPLIT & DATA ISOLATION INTEGRITY
+--------------------------------------------------------------------------------
+- Stratification Implementation (PASSED):
+  * Implemented in PySpark via sampleBy() with fractions={1: 0.8, 2: 0.8, 3: 0.8}
+    and fixed seed=42.
+  * Test partition constructed via left_anti join on 'collision_index'.
+  * Disjoint isolation: 100% strictly disjoint.
+  * Train partition: 79,901 records (79.90%)
+  * Test partition:  20,099 records (20.10%)
+  * Test class breakdown:
+    - Fatal:    306 ( 1.52%)
+    - Serious: 4,843 (24.10%)
+    - Slight: 14,950 (74.38%)
+- Transformation Fitting Boundary (PASSED):
+  * Feature pipeline (StringIndexer, OneHotEncoder, VectorAssembler) is fitted
+    exclusively on the 79,901 training records.
+  * The held-out test partition (20,099 records) is transformed without refitting.
+  * Class weights are calculated exclusively on training data.
+
+4. IDENTIFIED PIPELINE DEFICIENCIES & IMPROVEMENT OPPORTUNITIES
+--------------------------------------------------------------------------------
+[Issue 1] Inflexible Class Weighting & Extreme False Positive Rates
+- The baseline implementation applies unconstrained inverse-frequency class weights
+  (w_Fatal = 23.3, w_Serious = 1.34, w_Slight = 0.45).
+- While this achieves 61.11% fatal recall in Logistic Regression, it causes severe
+  false alarm generation (5,097 predicted fatal vs 306 actual fatal).
+- Fatal precision drops to 3.67%, meaning over 96% of fatal alerts are false positives.
+- Decision Tree and Random Forest implementations lacked proper tuning and
+  stratified cost-matrix optimization.
+
+[Issue 2] Missing High-Value Domain Feature Interactions
+- Current predictors contain individual factors (speed_limit, road_type, weather,
+  lighting, time_of_day) without interaction representations.
+- Critical road safety literature indicates compound hazards drive fatal outcomes:
+  * Speed limit x Road type (e.g. 60mph single carriageways produce ~61% rural fatalities)
+  * Weather x Road surface (e.g. Raining + Wet road surface vs Fine + Dry)
+  * Lighting x Time of Day (e.g. Darkness unlit at night vs Daylight morning commute)
+  * Weekend x Time of Day (e.g. Weekend night leisure driving vs Weekday morning rush)
+  * Road Environment x Speed Zone (e.g. Rural high-speed vs Urban low-speed)
+
+[Issue 3] Non-Cyclical Temporal Representations
+- 'hour' (0-23) and 'month' (1-12) were treated as linear numerical features.
+- Linear encoding creates an artificial boundary between 23:00 and 00:00 (distance of 23),
+  and between December (12) and January (1) (distance of 11).
+- Sine and Cosine cyclical transformations are required to model continuous cycles.
+
+[Issue 4] Missing Machine Learning Algorithms & Multiclass GBT Constraint
+- Only Logistic Regression, Decision Tree, and Random Forest were implemented.
+- Spark MLlib's GBTClassifier is natively binary-only (labels must be in {0, 1}).
+- A multiclass wrapper (OneVsRest with GBT) or MultilayerPerceptronClassifier (MLP)
+  or NaiveBayes should be systematically evaluated.
+
+[Issue 5] Lack of Systematic Hyperparameter Tuning
+- Baseline models were trained using static arbitrary hyperparameters (maxDepth=8,
+  numTrees=50, regParam=0.01).
+- No cross-validation or validation-split parameter grid search was performed.
+
+[Issue 6] Missing Probability Decision Threshold Analysis
+- Predictions currently use default argmax over softmax probabilities.
+- Custom decision thresholds tuned on validation data can dramatically improve the
+  precision-recall trade-off for minority safety classes.
+
+[Issue 7] Missing Baseline Comparison
+- No formal comparison against a Majority-Class Baseline (predicting all records
+  as 'Slight' yields 73.76% accuracy but 0.0% fatal recall, illustrating the
+  Accuracy Paradox).
+
+[Issue 8] Excel Dashboard Missing Entries
+- Sheet 4 ('ML Model Performance') of the Excel dashboard contains placeholder text
+  for Decision Tree and Random Forest confusion matrix counts.
+- These must be fully populated with real evaluation outputs.
+
+5. AUDIT CONCLUSION & ACTION PLAN
+--------------------------------------------------------------------------------
+The existing foundation is solid: data hygiene is clean, target leakage is zero,
+and train-test separation is valid. The improvement plan will:
+1. Engineer domain interactions and cyclical temporal features.
+2. Formulate and compare 4 class-imbalance strategies (Smoothed Sqrt, Effective Sample,
+   Training Oversampling, Training Undersampling).
+3. Benchmark additional Spark MLlib algorithms (GBT via OneVsRest, MLP, NaiveBayes).
+4. Perform systematic hyperparameter tuning using a clean validation split.
+5. Implement validation-tuned probability threshold analysis.
+6. Benchmark all models against the Majority-Class baseline.
+7. Update all reports, CSVs, and the Excel dashboard workbook.
+================================================================================
+
