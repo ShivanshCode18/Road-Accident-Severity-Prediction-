@@ -1,0 +1,118 @@
+{
+  "name": "UK Road Safety Dark Navy Theme",
+  "dataColors": [
+    "#06B6D4",
+    "#EF4444",
+    "#F59E0B",
+    "#10B981",
+    "#38BDF8",
+    "#8B5CF6",
+    "#EC4899",
+    "#64748B"
+  ],
+  "background": "#0F172A",
+  "foreground": "#F8FAFC",
+  "tableAccent": "#06B6D4",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "color": { "solid": { "color": "#1E293B" } },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#334155" } },
+            "radius": 8
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#020617" } },
+            "position": "Outer",
+            "preset": "BottomRight"
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontColor": { "solid": { "color": "#F8FAFC" } },
+            "fontSize": 12,
+            "fontFamily": "Segoe UI",
+            "bold": true,
+            "alignment": "Left"
+          }
+        ],
+        "labels": [
+          {
+            "color": { "solid": { "color": "#94A3B8" } },
+            "fontSize": 9,
+            "fontFamily": "Segoe UI"
+          }
+        ],
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontal": true,
+            "gridHorizontalColor": { "solid": { "color": "#334155" } }
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": { "solid": { "color": "#0F172A" } },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "color": { "solid": { "color": "#38BDF8" } },
+            "fontSize": 20,
+            "fontFamily": "Segoe UI",
+            "bold": true
+          }
+        ],
+        "categoryLabels": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#94A3B8" } },
+            "fontSize": 9,
+            "fontFamily": "Segoe UI"
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "header": [
+          {
+            "fontColor": { "solid": { "color": "#F8FAFC" } },
+            "textSize": 10,
+            "fontFamily": "Segoe UI",
+            "bold": true
+          }
+        ],
+        "items": [
+          {
+            "fontColor": { "solid": { "color": "#E2E8F0" } },
+            "background": { "solid": { "color": "#1E293B" } },
+            "textSize": 9,
+            "fontFamily": "Segoe UI"
+          }
+        ]
+      }
+    }
+  }
+}
+

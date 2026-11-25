@@ -1,0 +1,137 @@
+{
+  "best_model": "Logistic Regression",
+  "models": {
+    "Logistic Regression": {
+      "accuracy": 0.4742524503706652,
+      "weighted_f1": 0.5464477170662719,
+      "macro_f1": 0.338259045748406,
+      "fatal_recall": 0.6111111111111112,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.03668824798901314,
+          "recall": 0.6111111111111112,
+          "f1": 0.06922080325744956
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.2953264229859974,
+          "recall": 0.33532934131736525,
+          "f1": 0.3140591761748211
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.8124802693886142,
+          "recall": 0.5164548494983278,
+          "f1": 0.6314971578129472
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 187,
+          "Serious": 63,
+          "Slight": 56
+        },
+        "Serious (True)": {
+          "Fatal": 1493,
+          "Serious": 1624,
+          "Slight": 1726
+        },
+        "Slight (True)": {
+          "Fatal": 3417,
+          "Serious": 3812,
+          "Slight": 7721
+        }
+      },
+      "train_time_sec": 9.53808307647705
+    },
+    "Decision Tree": {
+      "accuracy": 0.46017214786805316,
+      "weighted_f1": 0.5346080589748833,
+      "macro_f1": 0.32566148358991165,
+      "fatal_recall": 0.5947712418300654,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.03333943945777615,
+          "recall": 0.5947712418300654,
+          "f1": 0.06313963573287076
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.2815891472868217,
+          "recall": 0.3000206483584555,
+          "f1": 0.29051284614615613
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.8031645569620253,
+          "recall": 0.5092976588628763,
+          "f1": 0.6233319688907081
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 182,
+          "Serious": 60,
+          "Slight": 64
+        },
+        "Serious (True)": {
+          "Fatal": 1588,
+          "Serious": 1453,
+          "Slight": 1802
+        },
+        "Slight (True)": {
+          "Fatal": 3689,
+          "Serious": 3647,
+          "Slight": 7614
+        }
+      },
+      "train_time_sec": 10.037313461303711
+    },
+    "Random Forest": {
+      "accuracy": 0.5450022389173591,
+      "weighted_f1": 0.5985098559137044,
+      "macro_f1": 0.36671874437945085,
+      "fatal_recall": 0.5490196078431373,
+      "per_class": {
+        "Fatal": {
+          "label": 0.0,
+          "precision": 0.043933054393305436,
+          "recall": 0.5490196078431373,
+          "f1": 0.08135593220338982
+        },
+        "Serious": {
+          "label": 1.0,
+          "precision": 0.3213389121338912,
+          "recall": 0.3171587858765228,
+          "f1": 0.319235165748727
+        },
+        "Slight": {
+          "label": 2.0,
+          "precision": 0.8046976946498478,
+          "recall": 0.6187290969899666,
+          "f1": 0.6995651351862356
+        }
+      },
+      "confusion_matrix": {
+        "Fatal (True)": {
+          "Fatal": 168,
+          "Serious": 73,
+          "Slight": 65
+        },
+        "Serious (True)": {
+          "Fatal": 1127,
+          "Serious": 1536,
+          "Slight": 2180
+        },
+        "Slight (True)": {
+          "Fatal": 2529,
+          "Serious": 3171,
+          "Slight": 9250
+        }
+      },
+      "train_time_sec": 57.588823318481445
+    }
+  }
+}

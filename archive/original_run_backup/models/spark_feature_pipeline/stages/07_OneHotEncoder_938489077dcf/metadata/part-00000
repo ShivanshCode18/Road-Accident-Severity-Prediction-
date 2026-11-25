@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoderModel","timestamp":1794246985527,"sparkVersion":"3.5.9","uid":"OneHotEncoder_938489077dcf","paramMap":{"inputCol":"urban_rural_name_idx","outputCol":"urban_rural_name_vec","handleInvalid":"keep"},"defaultParamMap":{"outputCol":"OneHotEncoder_938489077dcf__output","dropLast":true,"handleInvalid":"error"}}

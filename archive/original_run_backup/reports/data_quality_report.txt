@@ -1,0 +1,84 @@
+================================================================================
+                    DATA QUALITY REPORT: UK STATS19 (2025)
+   Academic B.Tech Project: Road Accident Severity Prediction with PySpark & Excel Dashboard
+================================================================================
+
+1. UNIQUE IDENTIFIER AUDIT
+   - Identifier Column Tested : collision_index
+   - Total Sample Records     : 100,000
+   - Distinct Identifiers     : 100,000
+   - Uniqueness Ratio         : 100.00%
+   - Scientific Notation Check: PASSED (Preserved as String)
+
+2. DUPLICATE ANALYSIS
+   - Exact Duplicate Rows in Final Dataset: 0
+   - Duplicate Collision Indices          : 0
+   - Duplicate Integrity Status           : VERIFIED - ZERO DUPLICATES
+
+3. TARGET VARIABLE VALIDATION (collision_severity)
+   - Target Column Name      : collision_severity
+   - Expected Domain         : {1: Fatal, 2: Serious, 3: Slight}
+   - Unique Observed Values  : [1, 2, 3]
+   - Invalid / Out-of-Domain : 0 records
+   - Class 1 (Fatal) Count   : 1,431 (1.43%)
+   - Class 2 (Serious) Count : 24,812 (24.81%)
+   - Class 3 (Slight) Count  : 73,757 (73.76%)
+
+4. GEOGRAPHIC COORDINATE VALIDATION
+   - Latitude Range Observed : 49.91253 to 60.34525
+   - Longitude Range Observed: -7.41772 to 1.75559
+   - UK Bounding Box Check   : PASSED (All coordinates within UK boundaries)
+   - Missing Coordinates     : 0 records
+
+5. SPEED LIMIT DOMAIN VALIDATION
+   - Observed Speed Limits   : [20, 30, 40, 50, 60, 70]
+   - Conformance to UK Limits: 100.0% (Valid limits: 20, 30, 40, 50, 60, 70 mph)
+
+6. MISSING VALUE ANALYSIS IN FINAL DATASET
+   - Total Columns with NaN Values: 0
+     * Zero NaN missing values present across all final columns.
+
+7. DATA TYPE CONFORMANCE AUDIT
+   - collision_index               : object
+   - collision_year                : int64
+   - longitude                     : float64
+   - latitude                      : float64
+   - police_force                  : int64
+   - collision_severity            : int64
+   - number_of_vehicles            : int64
+   - number_of_casualties          : int64
+   - date                          : object
+   - day_of_week                   : int64
+   - time                          : object
+   - local_authority_ons_district  : object
+   - first_road_class              : int64
+   - road_type                     : int64
+   - speed_limit                   : int64
+   - junction_detail               : int64
+   - junction_control              : int64
+   - pedestrian_crossing           : int64
+   - light_conditions              : int64
+   - weather_conditions            : int64
+   - road_surface_conditions       : int64
+   - carriageway_hazards           : int64
+   - urban_or_rural_area           : int64
+   - did_police_officer_attend_scene_of_accident: int64
+   - trunk_road_flag               : int64
+   - month                         : int32
+   - month_name                    : object
+   - hour                          : int32
+   - time_of_day                   : object
+   - day_name                      : object
+   - weekend_indicator             : int32
+   - weekday_weekend               : object
+   - severity_name                 : object
+   - road_type_name                : object
+   - urban_rural_name              : object
+   - weather_group                 : object
+   - road_surface_group            : object
+   - light_group                   : object
+   - speed_zone                    : object
+
+================================================================================
+Data quality audit completed successfully with no critical integrity violations.
+================================================================================

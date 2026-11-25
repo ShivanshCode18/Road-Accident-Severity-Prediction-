@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1794246986029,"sparkVersion":"3.5.9","uid":"StringIndexer_38c4448c6a42","paramMap":{"handleInvalid":"keep","outputCol":"road_surface_group_idx","inputCol":"road_surface_group"},"defaultParamMap":{"handleInvalid":"error","outputCol":"StringIndexer_38c4448c6a42__output","stringOrderType":"frequencyDesc"}}

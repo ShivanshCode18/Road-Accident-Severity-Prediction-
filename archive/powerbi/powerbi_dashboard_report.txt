@@ -1,0 +1,58 @@
+================================================================================
+              POWER BI DATA MODEL & DAX MEASURE BENCHMARK REPORT
+   Academic B.Tech Project: Road Accident Severity Prediction with PySpark & Power BI
+================================================================================
+
+1. DATASET SCHEMA & ROW COUNT VALIDATION
+   - FactCollisions (powerbi_dataset.csv)      : 100,000 rows, 32 columns (Nulls: 0)
+   - FactPredictions (powerbi_predictions.csv) : 20,099 rows, 26 columns (Nulls: 0)
+   - ModelPerformance (powerbi_model_performance.csv) : 3 rows, 15 columns
+
+2. ACCIDENT KPI DAX BENCHMARK VALUES (Page 1 & 2 Ground Truth)
+   - [Total Collisions]                    : 100,000
+   - [Fatal Collisions]                    : 1,431 (1.43%)
+   - [Serious Collisions]                  : 24,812 (24.81%)
+   - [Slight Collisions]                   : 73,757 (73.76%)
+   - [Total Casualties]                    : 125,983
+   - [Total Vehicles Involved]             : 181,245
+   - [Avg Casualties per Collision]        : 1.26
+   - [Avg Vehicles per Collision]          : 1.81
+   - [Weekend Collisions]                  : 24,476 (24.48%)
+   - [Weekday Collisions]                  : 75,524 (75.52%)
+
+3. MACHINE LEARNING DAX BENCHMARK VALUES (Page 4 Ground Truth)
+   - [Total Test Predictions]              : 20,099
+   - [Correct Predictions]                 : 9,532
+   - [Incorrect Predictions]               : 10,567
+   - [Model Prediction Accuracy]           : 47.43%
+   - [Actual Fatal Collisions in Test]     : 306
+   - [Predicted Fatal Collisions]          : 5,097
+   - [Fatal True Positives (TP)]           : 187
+   - [Fatal False Positives (FP)]          : 4,910
+   - [Fatal False Negatives (FN)]          : 119
+   - [Fatal True Negatives (TN)]           : 14,883
+   - [Fatal Detection Rate (Recall)]       : 61.11%
+   - [Fatal Precision]                     : 3.67%
+   - [Fatal F1-Score]                      : 0.0692
+   - [Serious Accident Recall]             : 33.53%
+   - [Slight Accident Recall]              : 51.65%
+   - [Avg Predicted Fatal Probability]     : 0.2703
+   - [Avg Predicted Serious Probability]   : 0.3452
+   - [Avg Predicted Slight Probability]    : 0.3845
+
+4. MODEL COMPARISON SUMMARY (Untouched Test Partition)
+   ---------------------------------------------------------------------------
+   Model Name               Accuracy  Weighted F1   Macro F1  Fatal Recall
+   ---------------------------------------------------------------------------
+   Logistic Regression        47.43%       0.5464     0.3383        61.11%
+   Decision Tree              46.02%       0.5346     0.3257        59.48%
+   Random Forest              54.50%       0.5985     0.3667        54.90%
+   ---------------------------------------------------------------------------
+
+5. SEVERITY BREAKDOWN BY ENVIRONMENT & URBAN/RURAL
+   - Urban Collisions                      : 66,127 (66.13%)
+   - Rural Collisions                      : 33,871 (33.87%)
+
+================================================================================
+Report generated successfully to support Power BI Desktop visual validation.
+================================================================================

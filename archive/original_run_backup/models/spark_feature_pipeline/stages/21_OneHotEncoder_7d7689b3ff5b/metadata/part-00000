@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoderModel","timestamp":1794246988282,"sparkVersion":"3.5.9","uid":"OneHotEncoder_7d7689b3ff5b","paramMap":{"inputCol":"police_force_idx","outputCol":"police_force_vec","handleInvalid":"keep"},"defaultParamMap":{"outputCol":"OneHotEncoder_7d7689b3ff5b__output","handleInvalid":"error","dropLast":true}}

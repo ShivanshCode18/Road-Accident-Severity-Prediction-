@@ -1,0 +1,107 @@
+================================================================================
+                    POWER BI DAX MEASURES QUICK REFERENCE
+   Academic B.Tech Project: Road Accident Severity Prediction with PySpark & Power BI
+================================================================================
+
+--- 1. ACCIDENT KPIS ---
+
+Total Collisions = COUNTROWS('FactCollisions')
+
+Total Casualties = SUM('FactCollisions'[number_of_casualties])
+
+Total Vehicles Involved = SUM('FactCollisions'[number_of_vehicles])
+
+Avg Casualties per Collision = DIVIDE([Total Casualties], [Total Collisions], 0)
+
+Avg Vehicles per Collision = DIVIDE([Total Vehicles Involved], [Total Collisions], 0)
+
+Fatal Collisions = CALCULATE([Total Collisions], 'FactCollisions'[collision_severity] = 1)
+
+Serious Collisions = CALCULATE([Total Collisions], 'FactCollisions'[collision_severity] = 2)
+
+Slight Collisions = CALCULATE([Total Collisions], 'FactCollisions'[collision_severity] = 3)
+
+Fatal Collision Percentage = DIVIDE([Fatal Collisions], [Total Collisions], 0)
+
+Serious Collision Percentage = DIVIDE([Serious Collisions], [Total Collisions], 0)
+
+Slight Collision Percentage = DIVIDE([Slight Collisions], [Total Collisions], 0)
+
+Severe Collisions = [Fatal Collisions] + [Serious Collisions]
+
+Severe Collision Percentage = DIVIDE([Severe Collisions], [Total Collisions], 0)
+
+Weekend Collisions = CALCULATE([Total Collisions], 'FactCollisions'[weekend_indicator] = 1)
+
+Weekday Collisions = CALCULATE([Total Collisions], 'FactCollisions'[weekend_indicator] = 0)
+
+Weekend Collision Percentage = DIVIDE([Weekend Collisions], [Total Collisions], 0)
+
+Weekday Collision Percentage = DIVIDE([Weekday Collisions], [Total Collisions], 0)
+
+
+--- 2. MACHINE LEARNING & PREDICTION METRICS ---
+
+Total Test Predictions = COUNTROWS('FactPredictions')
+
+Correct Predictions = CALCULATE([Total Test Predictions], 'FactPredictions'[prediction_correct] = 1)
+
+Incorrect Predictions = CALCULATE([Total Test Predictions], 'FactPredictions'[prediction_correct] = 0)
+
+Prediction Accuracy = DIVIDE([Correct Predictions], [Total Test Predictions], 0)
+
+Actual Fatal Collisions = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] = 1)
+
+Predicted Fatal Collisions = CALCULATE([Total Test Predictions], 'FactPredictions'[predicted_severity] = 1)
+
+Fatal True Positives = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] = 1, 'FactPredictions'[predicted_severity] = 1)
+
+Fatal False Positives = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] <> 1, 'FactPredictions'[predicted_severity] = 1)
+
+Fatal False Negatives = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] = 1, 'FactPredictions'[predicted_severity] <> 1)
+
+Fatal True Negatives = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] <> 1, 'FactPredictions'[predicted_severity] <> 1)
+
+Fatal Detection Rate = DIVIDE([Fatal True Positives], [Actual Fatal Collisions], 0)
+
+Fatal Precision = DIVIDE([Fatal True Positives], [Predicted Fatal Collisions], 0)
+
+Serious Accident Recall = 
+VAR SeriousTP = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] = 2, 'FactPredictions'[predicted_severity] = 2)
+VAR ActualSerious = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] = 2)
+RETURN DIVIDE(SeriousTP, ActualSerious, 0)
+
+Slight Accident Recall = 
+VAR SlightTP = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] = 3, 'FactPredictions'[predicted_severity] = 3)
+VAR ActualSlight = CALCULATE([Total Test Predictions], 'FactPredictions'[actual_severity] = 3)
+RETURN DIVIDE(SlightTP, ActualSlight, 0)
+
+Avg Predicted Fatal Probability = AVERAGE('FactPredictions'[prob_fatal])
+
+Avg Predicted Serious Probability = AVERAGE('FactPredictions'[prob_serious])
+
+Avg Predicted Slight Probability = AVERAGE('FactPredictions'[prob_slight])
+
+
+--- 3. FORMATTING & DYNAMIC LABELS ---
+
+Severity Color Hex = 
+SWITCH(
+    SELECTEDVALUE('FactCollisions'[severity_name]),
+    "Fatal", "#EF4444",
+    "Serious", "#F59E0B",
+    "Slight", "#10B981",
+    "#38BDF8"
+)
+
+Prediction Match Color = 
+IF(
+    SELECTEDVALUE('FactPredictions'[prediction_correct]) = 1,
+    "#10B981",
+    "#EF4444"
+)
+
+Dynamic Page 1 Title = "UK Road Collision Overview (" & FORMAT([Total Collisions], "#,##0") & " Collisions Analyzed)"
+
+Dynamic Model Diagnostic Title = "PySpark Multiclass Classifier Performance (Test Set N = " & FORMAT([Total Test Predictions], "#,##0") & " Records)"
+

@@ -1,0 +1,4 @@
+model_name,model_type,accuracy,weighted_precision,weighted_recall,weighted_f1,macro_f1,fatal_recall,fatal_precision,fatal_f1,serious_recall,serious_f1,slight_recall,slight_f1,train_time_sec
+Logistic Regression,Multinomial Logistic Regression (Class-Weighted),47.43,0.6761,0.4743,0.5464,0.3383,61.11,0.0367,0.0692,33.53,0.3141,51.65,0.6315,9.54
+Decision Tree,Decision Tree Classifier (maxDepth=8),46.02,0.6658,0.4602,0.5346,0.3257,59.48,0.0333,0.0631,30.0,0.2905,50.93,0.6233,10.04
+Random Forest,"Random Forest Classifier (50 Trees, maxDepth=10)",54.5,0.6766,0.545,0.5985,0.3667,54.9,0.0439,0.0814,31.72,0.3192,61.87,0.6996,57.59
